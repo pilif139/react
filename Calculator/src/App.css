@@ -88,7 +88,7 @@ h1{
   gap: 3px;
   width: 100%;
 }
-button{
+.buttons button{
   border: none;
   width: 100%; /* Ensure buttons take full width of their grid cell */
   width: 70px;
@@ -99,8 +99,17 @@ button{
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
-button:hover{
+.buttons button:hover{
   background-color: #ccb7c5;
   color: white;
 }
-
+.memory button{
+  border: none;
+  border-radius: 8px;
+  height: 2.5em;
+  font-size: 0.95em;
+  transition: 0.5s ease-in-out;
+}
+.memory button:hover{
+  background-color: rgb(210, 210, 210);
+}
