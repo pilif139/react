@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+* {
+    margin: 0;
+    font-family: 'Nunito Sans';
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #292929;
+    color: whitesmoke;
+}
+
+#root {
+    width: 100%;
+    min-height: 100vh; /* Zmiana */
+}
+
+.app {
+    width: 100%;
+    min-height: 100vh; /* Zmiana */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    flex: 1;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav h1 {
+    margin: 1.5em;
+}
+
+button {
+    border: none;
+    border-radius: 12px;
+    font-size: 1em;
+    width: 7em;
+    height: 4em;
+    font-weight: bold;
+    transition: 0.35s ease-in-out;
+}
+
+button:hover {
+    background-color: rgb(188, 188, 188);
+    color: black;
+}
+footer{
+    background-color: #1c1c1c;
+    width: 100%;
+    height: 5em;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+}
+footer svg{
+    height: 100%;
+    width: auto;
+}
+footer a{
+    height: 60%;
+    width: auto;
+    color:white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin-left: 0.5em;
+}
+
+
+/* Overlay */
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.77);
+}
+
+form {
+    display: block;
+    position: absolute;
+    background-color: rgb(75, 75, 75);
+    padding: 5em;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: wrap column;
+    text-align: center;
+}
+
+form svg {
+    height: 2em;
+    width: auto;
+    align-self: flex-end;
+}
+
+form h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+form button {
+    width: 100%;
+    margin-top: 1em;
+}
+
+textarea {
+    resize: none;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-flow: column;
+}
+
+/* Task */
+.Task {
+    background-color: rgb(75, 75, 75);
+    width: 60vw;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5em;
+    margin: 1.5em;
+    transition: 0.5s ease-in-out;
+}
+
+.Task p {
+    max-width: 60%;
+    max-height: 160px;
+    overflow-y: auto;
+    
+    font-size: 1.2em;
+}
+
+.Task p::-webkit-scrollbar {
+    width: 10px;
+    /* Width of the scrollbar */
+}
+
+.Task p::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Background of the scrollbar track */
+    border-radius: 5px;
+    /* Rounded corners */
+}
+
+.Task p::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Color of the scrollbar thumb */
+    border-radius: 5px;
+    /* Rounded corners */
+}
+
+.Task p::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Color of the scrollbar thumb on hover */
+}
+.Completed{
+    background-color: rgb(132, 197, 145);
+}
+.Completed p{
+    text-decoration: line-through;
+}
+.Task h3{
+    margin-left: auto;
+    margin-right: 2em;
+}
