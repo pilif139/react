@@ -48,7 +48,7 @@ export default function Calculator() {
         else {
             switch (sign) {
                 case "=":
-                    if(previousValues!==""){
+                    if(previousValues!=="" && !previousValues.includes("=")){
                         evaluate(previousValues, value);
                     }
                     break;
@@ -61,7 +61,7 @@ export default function Calculator() {
                     break;
                 case 'bsp':
                     if(value!=="Błąd"){
-                    setValue(value.slice(0, -1));
+                        setValue(value.toString().slice(0, -1));
                     }
                     break;
                 case '%':
@@ -75,7 +75,11 @@ export default function Calculator() {
                     }
                     break;
                 case "x^2":
-                    evaluate(value, "*" + value)
+                    if(previousValues===""){
+                        evaluate(value, "*" + value)
+                    }else{
+                        setValue(value**2)
+                    }
                     break;
                 case "sqrt(x)":
                     if(value!=="Błąd")
@@ -94,7 +98,6 @@ export default function Calculator() {
                 case "/":
                 case "*":
                     if (!previousValues.includes("+") && !previousValues.includes("-") && !previousValues.includes("*") && !previousValues.includes("/") || previousValues.includes("=") ) {
-                        console.log("xd")
                         setPreviousValues(value + sign);
                         setValue("0");
                     }
