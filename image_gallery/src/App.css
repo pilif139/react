@@ -48,4 +48,8 @@ img {
   border-radius: 8px;
   object-fit: cover;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+img:hover{
+  opacity: 0.8;
 }
