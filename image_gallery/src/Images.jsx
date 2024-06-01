@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import Overlay from "./Overlay.jsx";
 
-function Images({images, onClick}) {
+function Images({images}) {
     const [isOverlayOpen, setOverlayOpen] = useState(false);
     const [focusedImgURL, setFocusedImageURL] = useState(null);
     const [downloadUrl, setDownloadUrl ]= useState("");
@@ -34,7 +34,7 @@ function Images({images, onClick}) {
             <div className="image-container">
                 {
                     images.length > 0 &&
-                    images.map((image, index) => <img src={image.webformatURL} key={image.id}
+                    images.map((image) => <img src={image.webformatURL} alt={image.tags} key={image.id}
                                                       onClick={() => handleFocusImage(image.webformatURL, image.pageURL)}/>)
                 }
             </div>
