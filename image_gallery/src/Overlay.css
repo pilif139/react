@@ -1,0 +1,69 @@
+.overlay-background {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 9;
+}
+
+.overlay-container {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    z-index: 10;
+    padding: 30px;
+    width: max-content;
+    height: max-content;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.overlay-controls {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: flex-end;
+}
+
+.overlay-close:after {
+    display: inline-block;
+    content: "\00d7";
+}
+
+.overlay-close {
+    border: none;
+    background-color: transparent;
+    font-size: 36px;
+    cursor: pointer;
+}
+.overlay a{
+    text-decoration: none;
+    color: white;
+}
+.buttons{
+    position: absolute;
+    bottom: -5em;
+}
+.downloadBtn{
+    font-size: 1.5em;
+    margin: 0 1em;
+    border: 4px solid white;
+    border-radius: 12px;
+    background-color: cornflowerblue;
+    color: white;
+    padding: 10px;
+    transition: 0.5s ease-in-out;
+}
+.downloadBtn:hover{
+    padding: 15px;
+}
