@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+*{
+    margin: 0;
+    font-family: "Rubik", sans-serif;
+}
+body{
+    background-color: rgb(123, 101, 181);
+    height: 100vh;
+}
+#root{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: wrap column;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    color: white;
+    text-align: center;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.canvas{
+    background-color: white;
+    border-radius: 12px;
+    /* width: 100%; /* or any fixed width you want */
+    /*height: 80vh; /* or any fixed height you want */
+    /* position: relative; */
+}
+.tools{
+    font-weight: bold;
+    font-size: 1.5em;
+    width: 20%;
+    height: 10%;
+    display: grid;
+    grid: 1fr 1fr 1fr / repeat(9, 1fr);
+    gap: 5%;
+}
+button{
+    width: 2em;
+    height: 2em;
+    margin: 0;
+    border: none;
+    border-radius: 8px;
+    transition: 0.3s ease-in-out;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+}
+button:hover{
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+    box-shadow: 0px 0px 10px 0px rgba(66, 68, 90, 1);
+}
