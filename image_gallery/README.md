@@ -9,6 +9,6 @@ Currently, two official plugins are available:
 
 to run app:
 
-cd image_gallery
-npm install
-npm run dev
+cd image_gallery\n
+npm install\n
+npm run dev\n
