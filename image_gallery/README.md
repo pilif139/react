@@ -8,7 +8,8 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 to run app:
-
-cd image_gallery\n
-npm install\n
-npm run dev\n
+```
+cd image_gallery
+npm install
+npm run dev
+```
