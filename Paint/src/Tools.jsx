@@ -25,7 +25,7 @@ export default function Tools({clearCanvas}) {
         </div>
         <form>
           <label>Size</label>
-          <input type="number" placeholder='select size' onChange={(e)=>setSize(e.target.value)}/>
+          <input type="number" placeholder='select size' value={size} onChange={(e)=>setSize(e.target.value)}/>
         </form>
    </div>
   )

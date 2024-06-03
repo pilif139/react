@@ -3,6 +3,7 @@ import { useRef, useEffect, useContext, forwardRef, useImperativeHandle } from "
 import { ColorContext, SizeContext } from "./App";
 
 const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
+    const undoButton = useRef(null)
     const canvasRef = useRef(null);
     const isDrawing = useRef(false);
     const { color } = useContext(ColorContext);
@@ -17,8 +18,6 @@ const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
         }
     }));
 
-    
-
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
@@ -26,19 +25,6 @@ const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
         const saveState = () =>{
             const dataUrl = canvas.toDataURL();
             setHistory((pv)=>[...pv,dataUrl]);
-        }
-
-        const restoreState = () =>{
-            if(history.length > 0){
-                const previousState = history[history.length-1];
-                setHistory(history.slice(0,-1));
-                const img = new Image();
-                img.src = previousState;
-                img.onload = () => {
-                    ctx.clearRect(0,0,canvas.width, canvas.height);
-                    ctx.drawImage(img,0,0);
-                }
-            }
         }
 
         const getRelativeCoords = (event) => {
@@ -51,12 +37,12 @@ const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
 
         const start = (event) => {
             isDrawing.current = true;
-            saveState();
             const coords = getRelativeCoords(event);
             ctx.beginPath();
             ctx.moveTo(coords.x, coords.y);
             event.preventDefault();
         };
+        
 
         const draw = (event) => {
             if (isDrawing.current) {
@@ -88,6 +74,7 @@ const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
         };
 
         canvas.addEventListener('mousedown', mouseDownListener);
+        canvas.addEventListener("mouseup", saveState);
 
         return () => {
             canvas.removeEventListener('mousedown', mouseDownListener);
@@ -97,14 +84,35 @@ const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
         };
     }, [color, size,history]);
 
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+
+        const restoreState = () =>{
+            if(history.length > 0){
+                const previousState = history[history.length-1];
+                setHistory(history.slice(0,-1));
+                const img = new Image();
+                img.src = previousState;
+                img.onload = () => {
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+                    ctx.drawImage(img,0,0);
+                }
+            }
+        }
+
+        const undoButtonCurrent = undoButton.current;
+        undoButtonCurrent.addEventListener("click", restoreState);
+
+        return () => {
+            undoButtonCurrent.removeEventListener("click", restoreState);
+        };
+    }, [history]);
+
     return (
         <>
             <canvas ref={canvasRef} {...props} />
-            <button onClick={()=>{
-                if(canvasRef){
-                    restoreState();
-                }
-            }}>Undo</button>
+            <button ref={undoButton}>Undo</button>
         </>
     );
 });
