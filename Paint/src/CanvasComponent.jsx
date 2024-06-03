@@ -1,18 +1,45 @@
-import React from 'react';
-import { useRef, useEffect } from "react";
-import { useContext } from 'react';
+import React, { useState } from 'react';
+import { useRef, useEffect, useContext, forwardRef, useImperativeHandle } from "react";
 import { ColorContext, SizeContext } from "./App";
 
-function CanvasComponent(props) {
-    const canvasRef = useRef(null)
+const CanvasComponent = forwardRef((props, ref) => { // Dodanie forwardRef
+    const canvasRef = useRef(null);
     const isDrawing = useRef(false);
+    const { color } = useContext(ColorContext);
+    const { size } = useContext(SizeContext);
+    const  [history,setHistory] = useState([]);
 
-    const {color, setColor} = useContext(ColorContext);
-    const {size,setSize} = useContext(SizeContext);
+    useImperativeHandle(ref, () => ({ // Dodanie useImperativeHandle
+        clearCanvas: () => {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, props.width, props.height);
+        }
+    }));
+
+    
 
     useEffect(() => {
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
+
+        const saveState = () =>{
+            const dataUrl = canvas.toDataURL();
+            setHistory((pv)=>[...pv,dataUrl]);
+        }
+
+        const restoreState = () =>{
+            if(history.length > 0){
+                const previousState = history[history.length-1];
+                setHistory(history.slice(0,-1));
+                const img = new Image();
+                img.src = previousState;
+                img.onload = () => {
+                    ctx.clearRect(0,0,canvas.width, canvas.height);
+                    ctx.drawImage(img,0,0);
+                }
+            }
+        }
 
         const getRelativeCoords = (event) => {
             const rect = canvas.getBoundingClientRect();
@@ -24,7 +51,7 @@ function CanvasComponent(props) {
 
         const start = (event) => {
             isDrawing.current = true;
-            // Get relative coordinates for starting point
+            saveState();
             const coords = getRelativeCoords(event);
             ctx.beginPath();
             ctx.moveTo(coords.x, coords.y);
@@ -33,7 +60,6 @@ function CanvasComponent(props) {
 
         const draw = (event) => {
             if (isDrawing.current) {
-                // Get relative coordinates for drawing
                 const coords = getRelativeCoords(event);
                 ctx.lineTo(coords.x, coords.y);
                 ctx.strokeStyle = color;
@@ -69,11 +95,18 @@ function CanvasComponent(props) {
             canvas.removeEventListener('mouseup', stop);
             canvas.removeEventListener('mouseout', stop);
         };
-    }, [color,size]);
+    }, [color, size,history]);
 
     return (
-        <canvas ref={canvasRef} {...props}/>
+        <>
+            <canvas ref={canvasRef} {...props} />
+            <button onClick={()=>{
+                if(canvasRef){
+                    restoreState();
+                }
+            }}>Undo</button>
+        </>
     );
-}
+});
 
 export default CanvasComponent;

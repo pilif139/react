@@ -1,6 +1,6 @@
 import React from 'react'
 import { useContext } from 'react';
-import { ColorContext, SizeContext } from "./App";
+import { ColorContext} from "./App";
 
 export default function ColorButton({btnColor}) {
     const {color, setColor} = useContext(ColorContext);
