@@ -45,14 +45,18 @@
     background-color: transparent;
     font-size: 36px;
     cursor: pointer;
+    transition: 0.5s ease-in-out;
+}
+.overlay-close:hover{
+    transform: rotate(180deg)
 }
 .overlay a{
     text-decoration: none;
     color: white;
 }
 .buttons{
-    position: absolute;
-    bottom: -5em;
+    position: fixed;
+    bottom: 7em;
 }
 .downloadBtn{
     font-size: 1.5em;

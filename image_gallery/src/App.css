@@ -35,6 +35,7 @@ div.image-container{
   place-items: center;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
+  padding: 1em;
   overflow-y: auto;
   grid-gap: 2%;
   border-radius: 8px;
@@ -42,7 +43,7 @@ div.image-container{
 div.image-container::-webkit-scrollbar {
   display: none;
 }
-img {
+.image-container img {
   width: 100%;
   height: 100%;
   border-radius: 8px;
@@ -50,6 +51,9 @@ img {
   cursor: pointer;
   transition: 0.5s ease-in-out;
 }
-img:hover{
+.image-container img:hover{
   opacity: 0.8;
+  -webkit-box-shadow: 0 0 20px 0 rgba(66, 68, 90, 1);
+  -moz-box-shadow: 0 0 20px 0 rgba(66, 68, 90, 1);
+  box-shadow: 0 0 20px 0 rgba(66, 68, 90, 1);
 }

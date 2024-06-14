@@ -1,6 +1,13 @@
+import React, { ReactNode } from "react"
 import "./Overlay.css"
 
-export default function Overlay({isOpen, onClose, children}){
+interface OverlayProps {
+    isOpen: boolean;
+    onClose: ()=>void;
+    children: ReactNode;
+}
+
+export default function Overlay({isOpen, onClose, children}: OverlayProps){
     return(
         <>
             {isOpen && (
