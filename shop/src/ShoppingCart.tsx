@@ -6,7 +6,7 @@ export default function ShoppingCart() {
 
   const handleChangeQuantity = (item: CartItem,e: ChangeEvent<HTMLInputElement>)=>{
     e.preventDefault();
-    changeItemQuantity(item, e.target.valueAsNumber, e)
+    changeItemQuantity(item, e.target.valueAsNumber)
   }
 
   return (

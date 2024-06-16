@@ -1,4 +1,4 @@
-import { ChangeEvent, createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 export interface CartItem{
     name: string;
@@ -11,7 +11,7 @@ interface ShoppingCart{
 	fullPrice: number;
   addItem: (item: CartItem) => void;
   removeItem: (itemName: string) => void;
-  changeItemQuantity: (item:CartItem, number:number, event:ChangeEvent)=>void;
+  changeItemQuantity: (item:CartItem, number:number)=>void;
 }
 
 const ShoppingCartContext = createContext<ShoppingCart | undefined>(undefined);
@@ -24,11 +24,10 @@ export function ShoppingCartProvider({children}: Props) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [fullPrice, setFullPrice] = useState<number>(0);
 
-  const changeItemQuantity = (item: CartItem, number: number, event:ChangeEvent) => {
+  const changeItemQuantity = (item: CartItem, number: number) => {
     setItems((prevItems) => {
         const itemToChange = prevItems.findIndex((it) => it.name === item.name);
         if (itemToChange !== -1) {
-            event.preventDefault()
             setFullPrice((prevPrice) => prevPrice - item.price * item.quantity + item.price * number);
             console.log("changed price")
             const updatedItems = [...prevItems];
