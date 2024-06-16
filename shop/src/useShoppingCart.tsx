@@ -25,18 +25,17 @@ export function ShoppingCartProvider({children}: Props) {
   const [fullPrice, setFullPrice] = useState<number>(0);
 
   const changeItemQuantity = (item: CartItem, number: number, event:ChangeEvent) => {
-    event.preventDefault()
     setItems((prevItems) => {
         const itemToChange = prevItems.findIndex((it) => it.name === item.name);
         if (itemToChange !== -1) {
+            event.preventDefault()
             setFullPrice((prevPrice) => prevPrice - item.price * item.quantity + item.price * number);
-            console.log("Item Price:", item.price, "Old Quantity:", item.quantity, "New Quantity:", number);
+            console.log("changed price")
             const updatedItems = [...prevItems];
             updatedItems[itemToChange] = {
                 ...updatedItems[itemToChange],
                 quantity: number,
             };
-            console.log("Updated Items:", updatedItems);
             return updatedItems;
         }
         return [...prevItems, item];

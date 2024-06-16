@@ -1,19 +1,13 @@
-import { useShoppingCart } from "./useShoppingCart";
-import { ChangeEvent, useState } from "react";
-import { useDebounce } from "./useDebounce";
-import {CartItem} from './useShoppingCart';
+import { ChangeEvent } from "react";
+import { CartItem, useShoppingCart } from "./useShoppingCart";
 
 export default function ShoppingCart() {
   const { items, fullPrice, removeItem, changeItemQuantity } = useShoppingCart();
-  const [localQuantity, setLocalQuantity] = useState<{ [key: string]: number }>({});
 
-  const handleQuantityChange = (item: CartItem, value: number, event: ChangeEvent<HTMLInputElement>) => {
-    setLocalQuantity((prev) => ({
-      ...prev,
-      [item.name]: value
-    }));
-    changeItemQuantity(item, value, event);
-  };
+  const handleChangeQuantity = (item: CartItem,e: ChangeEvent<HTMLInputElement>)=>{
+    e.preventDefault();
+    changeItemQuantity(item, e.target.valueAsNumber, e)
+  }
 
   return (
     <div className="min-h-4-6 p-6 grid grid-cols-1 gap-4">
@@ -21,7 +15,7 @@ export default function ShoppingCart() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 col-span-full">
         {items.map((item, id) => {
           // eslint-disable-next-line react-hooks/rules-of-hooks
-          const debouncedQuantity = useDebounce(localQuantity[item.name] ?? item.quantity, 100);
+          // const debouncedQuantity = useDebounce(localQuantity[item.name] ?? item.quantity, 100);
           return (
             <div key={id} className="w-full bg-slate-500 text-white p-4 rounded-xl flex flex-col md:flex-row justify-between items-center hover:shadow-2xl hover:bg-slate-600 transition-all max-h-24">
               <div className="mx-2 p-2 rounded-lg bg-slate-700">{item.name}</div>
@@ -31,8 +25,8 @@ export default function ShoppingCart() {
                   id={`quantity-${id}`}
                   type="number"
                   min="0"
-                  value={debouncedQuantity}
-                  onChange={(e) => handleQuantityChange(item, e.target.valueAsNumber, e)}
+                  value={item.quantity}
+                  onChange={(e) =>handleChangeQuantity(item,e)}
                   className="mx-2 p-2 rounded-lg bg-slate-700"
                 />
               </div>
