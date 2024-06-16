@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface Props {
   name: string;
+  tag: string;
   options: string[];
 }
 
-export default function DropdownMenu({ name, options }: Props) {
+export default function DropdownMenu({ name,tag, options }: Props) {
   const [show, setShow] = useState<boolean>(false);
 
   return (
@@ -13,7 +15,7 @@ export default function DropdownMenu({ name, options }: Props) {
         className="flex-col justify-between"
         onMouseEnter={() => setShow(true)} onMouseLeave={() => setShow(false)}>
       <span className="text-xl px-2 my-1 hover:bg-indigo-300 transition-colors rounded-lg cursor-pointer">
-        {name}
+        <Link to={tag+"-shop"}>{name}</Link>
       </span>
       <div>
         {show && (

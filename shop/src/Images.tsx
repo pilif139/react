@@ -1,21 +1,25 @@
-import imgs from './images.ts'
 import { Link } from 'react-router-dom';
+import {Image} from './App'
 
-export default function Images() {
+interface Props{
+  imgs: Image[]
+}
+
+export default function Images({imgs}: Props) {
 
   return (
     <div className='bg-indigo-50 h-4/6'>
-      <Link to="item-shop"
-        className="h-full w-full flex overflow-x-scroll ">
-        {imgs.map((image, id) => (
-            <img
-              className="mx-2 my-2 rounded-3xl w-auto cursor-pointer hover:border-8 hover:border-indigo-600 transition-all" 
-              src={image} 
-              alt={`image-${id}`}
-              key={id}
-            />
-        ))}
-      </Link>
+    <div className="h-full w-full flex overflow-x-scroll overflow-hidden">
+      {imgs.map((image, id) => (
+        <Link to={`/${image.tag}-shop`} key={id} className="flex-shrink-0">
+          <img
+            className="mx-2 my-2 rounded-3xl h-full w-auto cursor-pointer hover:border-8 hover:border-indigo-600 transition-all" 
+            src={image.src} 
+            alt={`image-${id}`}
+          />
+        </Link>
+      ))}
     </div>
+  </div>
   );
 }
