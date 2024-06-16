@@ -10,9 +10,6 @@
 .transition-colors{
   transition-duration: 500ms;
 }
-.h-50{
-  height: 40rem;
-}
 
 /* Example scrollbar styling */
 /* width */
@@ -33,4 +30,11 @@
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+.scale-250{
+  transform: scale(5)
+}
+
+.min-h-4-6{
+  min-height: 66.6%;
 }
