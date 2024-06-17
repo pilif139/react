@@ -38,3 +38,7 @@
 .min-h-4-6{
   min-height: 66.6%;
 }
+
+.transition-shadow{
+  transition-duration: 500ms;
+}

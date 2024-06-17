@@ -20,9 +20,9 @@ function Header({title, categories}:Props) {
                 </Link>
             </h1>
             <nav className="flex">
-                {categories.map((category,id)=><DropdownMenu key={id} name={category.name} tag={category.tag} options={category.subcategories}></DropdownMenu>)}
+                {categories.map((category,id)=><DropdownMenu key={id} name={category.name} tag={category.tag} subcategories={category.subcategories}></DropdownMenu>)}
             </nav>
-            <Link to="/shopping-cart" className="fixed right-10 top-8 flex items-center space-x-2 bg-indigo-300 hover:bg-indigo-400 p-2 rounded-full transition-colors">
+            <Link to="/shopping-cart" className="fixed right-10 top-8 flex items-center space-x-2 bg-indigo-300 hover:bg-indigo-400 hover:shadow-2xl p-2 rounded-full transition-all">
                 <p className="text-lg font-semibold">{fullPrice === 0 ? "Koszyk pusty" : fullPrice+"zł"}</p>
                 <CiShoppingBasket className="text-5xl" />
             </Link>

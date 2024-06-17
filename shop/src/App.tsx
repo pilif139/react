@@ -21,7 +21,7 @@ export interface Image {
 function App() {
   const categories: Category[] = [
     {
-      name: "Męskie",
+      name: "Mężczyzna",
       tag: "men",
       subcategories: [
         "T-Shirt",
@@ -33,7 +33,7 @@ function App() {
       ],
     },
     {
-      name: "Damskie",
+      name: "Kobieta",
       tag: "women",
       subcategories: ["T-Shirt", "Jeansy", "Spodnie", "Sukienki", "Kurtki"],
     },
@@ -45,7 +45,7 @@ function App() {
     {
       name: "Sport",
       tag: "sport",
-      subcategories: ["Szorty", "Stroje kąpielowe", "Piłki", "Koszulki", "Skateboard"],
+      subcategories: ["Koszulka", "Stroje kąpielowe", "Piłki", "Szorty", "Skateboard"],
     },
   ];
 
@@ -76,11 +76,12 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Images imgs={images}/>}/>
 					<Route index element={<Images imgs={images}/>}/>
-					<Route path="men-shop" element={<ItemShop section="Dział męski"/>}/>
-          <Route path="women-shop" element={<ItemShop section="Dział damski"/>}/>
-          <Route path="shoe-shop" element={<ItemShop section="Obuwie"/>}/>
-          <Route path="sport-shop" element={<ItemShop section="Dział sportowy"/>}/>
 					<Route path="shopping-cart" element={<ShoppingCart/>}/>
+          {
+            categories.map((category,id)=>(
+              <Route path={`${category.tag}`} element={<ItemShop section={category.name}/>} key={id}/>
+            ))
+          }
 				</Routes>
 			</BrowserRouter>
 			<Footer></Footer>
