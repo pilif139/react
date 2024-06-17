@@ -5,6 +5,7 @@ export interface CartItem{
     quantity: number;
     price: number;
     tag: string;
+    size: string;
 }
 
 interface ShoppingCart{
@@ -43,21 +44,26 @@ export function ShoppingCartProvider({children}: Props) {
 };
 
 
-  const addItem = (item: CartItem) =>{
-    setItems((prevItems) => {
-      const ItemToAdd = prevItems.findIndex((it)=>it.name === item.name);
-      if(ItemToAdd !== -1){
-        const updatedItems = [...prevItems];
-        updatedItems[ItemToAdd] = {
-          ...updatedItems[ItemToAdd],
-          quantity: updatedItems[ItemToAdd].quantity + item.quantity,
-        }
-        return updatedItems;
-      }
-      return [...prevItems, item]
-    });
-    setFullPrice((prevPrice)=> prevPrice+ item.price*item.quantity);
-  }
+const addItem = (item: CartItem) => {
+  setItems((prevItems) => {
+    const ItemToAdd = prevItems.findIndex(
+      (it) => it.name === item.name && it.size === item.size
+    );
+
+    if (ItemToAdd !== -1) {
+      const updatedItems = [...prevItems];
+      updatedItems[ItemToAdd] = {
+        ...updatedItems[ItemToAdd],
+        quantity: updatedItems[ItemToAdd].quantity + item.quantity,
+      };
+      return updatedItems;
+    } else {
+      return [...prevItems, item];
+    }
+  });
+
+  setFullPrice((prevPrice) => prevPrice + item.price * item.quantity);
+};
 
   const removeItem = (itemName: string) =>{
     setItems((prevItems)=>{

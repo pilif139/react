@@ -19,7 +19,7 @@ export default function ShoppingCartItem({item, id} :Props) {
         key={id}
         className="min-w-full bg-slate-500 text-white p-4 rounded-xl flex flex-col md:flex-row justify-between items-center hover:shadow-2xl hover:bg-slate-600 transition-all max-h-48"
         >
-        <div className="mx-2 p-2 rounded-lg bg-slate-700">{item.name}</div>
+        <div className="mx-2 p-2 rounded-lg bg-slate-700">{item.name} - {item.size}</div>
         <div className="flex items-center">
             <label htmlFor={`quantity-${id}`} className="mx-2">
             Ilość:
