@@ -22,9 +22,11 @@ export default function DropdownMenu({ name,tag, subcategories }: Props) {
           <ul className="p-2 bg-indigo-50 absolute rounded-lg transition-opacity duration-300 ease-in-out">
             {
                 subcategories.map((subcategory, id) => (
-                    <li className="hover:bg-indigo-100 transition-colors rounded-lg p-2" key={id}>
+                    <Link to={tag+"-"+subcategory} key={id}>
+                      <li className="hover:bg-indigo-100 transition-colors rounded-lg p-2 w-full" key={id}>
                       {subcategory}
-                    </li>
+                      </li>
+                    </Link>
                 ))
             }
           </ul>

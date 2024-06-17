@@ -5,7 +5,9 @@ import Footer from "./Footer.tsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ShoppingCart from "./ShoppingCart.tsx";
 import { ShoppingCartProvider } from "./useShoppingCart.tsx";
-import imgs from './images.ts'
+import imgs from "./images.ts";
+import { ReactNode } from "react";
+import NoPage from "./NoPage.tsx";
 
 export interface Category {
   name: string;
@@ -18,6 +20,11 @@ export interface Image {
   tag: string;
 }
 
+interface Route {
+  path: string;
+  element: ReactNode;
+}
+
 function App() {
   const categories: Category[] = [
     {
@@ -27,14 +34,14 @@ function App() {
         "T-Shirt",
         "Jeansy",
         "Spodnie",
-        "Płaszcze",
+        "Plaszcze",
         "Kurtki",
         "Marynarki",
       ],
     },
     {
       name: "Kobieta",
-      tag: "women",
+      tag: "woman",
       subcategories: ["T-Shirt", "Jeansy", "Spodnie", "Sukienki", "Kurtki"],
     },
     {
@@ -45,48 +52,78 @@ function App() {
     {
       name: "Sport",
       tag: "sport",
-      subcategories: ["Koszulka", "Stroje kąpielowe", "Piłki", "Szorty", "Skateboard"],
+      subcategories: [
+        "Koszulka",
+        "Stroje kapielowe",
+        "Pilki",
+        "Szorty",
+        "Skateboard",
+      ],
     },
   ];
 
   const images = [
     {
       src: imgs[0],
-      tag: 'men',
+      tag: "men",
     },
     {
       src: imgs[1],
-      tag: 'women',
+      tag: "women",
     },
     {
       src: imgs[2],
-      tag: 'shoe',
+      tag: "shoe",
     },
     {
       src: imgs[3],
-      tag: 'sport',
+      tag: "sport",
     },
-  ]
+  ];
+
+  const routes: Route[] = [
+    {
+      path: "/",
+      element: <Images imgs={images} />,
+    },
+    {
+      path: "shopping-cart",
+      element: <ShoppingCart />,
+    },
+    {
+      path: "*",
+      element: <NoPage />,
+    },
+  ];
 
   return (
-	<ShoppingCartProvider>
-		<main className="h-full font-radio-canada-big flex-col center max-w-dvw overflow-x-hidden">
-			<BrowserRouter>
-				<Header title="Sklep" categories={categories}></Header>
-				<Routes>
-					<Route path="/" element={<Images imgs={images}/>}/>
-					<Route index element={<Images imgs={images}/>}/>
-					<Route path="shopping-cart" element={<ShoppingCart/>}/>
-          {
-            categories.map((category,id)=>(
-              <Route path={`${category.tag}`} element={<ItemShop section={category.name}/>} key={id}/>
-            ))
-          }
-				</Routes>
-			</BrowserRouter>
-			<Footer></Footer>
-		</main>
-	</ShoppingCartProvider>
+    <ShoppingCartProvider>
+      <main className="h-full font-radio-canada-big flex-col center max-w-dvw overflow-x-hidden">
+        <BrowserRouter>
+          <Header title="Sklep" categories={categories}></Header>
+          <Routes>
+            {routes.map((route, id) => (
+              <Route path={route.path} element={route.element} key={id} />
+            ))}
+            {categories.map((category, id) => {
+              return (
+                <Route
+                  path={`${category.tag}`}
+                  element={<ItemShop section={category.name} />}
+                  key={id}
+                />
+              );
+            })}
+            {
+              categories.map((category)=>{
+                return category.subcategories.map((subcat,id)=> <Route path={`${category.tag}-${subcat}`} element={<ItemShop section={category.name}/>} key={id}/>)
+              })
+            }
+          </Routes>
+        </BrowserRouter>
+        <Footer></Footer>
+      </main>
+    </ShoppingCartProvider>
   );
 }
 

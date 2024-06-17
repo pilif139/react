@@ -21,7 +21,7 @@ export default function Product({name,price, img, alt, tag}: Props) {
   }
 
   return (
-    <div className="col-auto flex flex-col text-white w-72 bg-indigo-400 hover:bg-indigo-500 transition-all m-5 rounded-2xl p-5 hover:shadow-2xl max-h-80">
+    <div className="col-auto flex flex-col justify-between text-white w-72 bg-indigo-400 hover:bg-indigo-500 transition-all m-5 rounded-2xl p-5 hover:shadow-2xl  max-h-96">
         <div className="flex mb-4 justify-between items-center">
           <span className=" text-2xl">{name}</span>
           <div className="text-xl bg-red-400 rounded-xl flex p-2">{price}zł</div>
